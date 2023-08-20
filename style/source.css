@@ -30,6 +30,10 @@ a {
   color: #878787;
 }
 
+#open-source-link {
+  color: blue;
+}
+
 .unit {
   font-size: 28px;
 }
