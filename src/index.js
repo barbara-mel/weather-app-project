@@ -94,3 +94,14 @@ pressSearchCountry.addEventListener("click", showSearchPosition);
 // Create a new function to update the date and time according to the country that you are searching
 
 //create a function to convert celsiu to farentheit
+
+// Function to submit the for pressing Enter
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#search-tab-input");
+  showSearchPosition(cityInputElement.value);
+}
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
