@@ -35,12 +35,12 @@ button {
   background: transparent;
 }
 
-.unit {
-  font-size: 28px;
-}
-
 .col-3 {
   width: 15%;
+}
+
+.units {
+  font-size: 14px;
 }
 
 #current-button {
