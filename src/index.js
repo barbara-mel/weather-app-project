@@ -56,7 +56,6 @@ todayDay.innerHTML = `Today, ${day} ${month} ${date}, ${hours}:${minutes}`;
 //name of the city on the result page and the current temperature of the city.
 
 function displayWeather(event) {
-  debugger;
   console.log(event);
   let h1 = document.querySelector("#country-1");
   let searchTemperature = document.querySelector("#today-temperature");
