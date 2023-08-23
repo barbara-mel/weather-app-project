@@ -29,14 +29,14 @@ a {
   color: blue;
 }
 
-.unit {
-  font-size: 28px;
-}
-
 /* Button style area */
 button {
   border: none;
   background: transparent;
+}
+
+.unit {
+  font-size: 28px;
 }
 
 .col-3 {
@@ -49,6 +49,10 @@ button {
 .btn {
   color: #fff;
   background: violet;
+}
+
+.container {
+  max-width: 1200px;
 }
 
 /* Search tab area */
