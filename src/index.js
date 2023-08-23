@@ -131,3 +131,5 @@ currentButton.addEventListener("click", getCurrentPosition);
 
 // Maybe add a temperature for a default city
 // Good for the customer experience
+
+// Create a new function to update the date and time according to the country that you are searching
