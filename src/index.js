@@ -88,48 +88,9 @@ function showSearchPosition(show) {
 let pressSearchCountry = document.querySelector("#search-button");
 pressSearchCountry.addEventListener("click", showSearchPosition);
 
-// 🙀 Bonus point:
-// Add a Current Location button. When clicking on it, it uses the Geolocation API to get your GPS
-// coordinates and display and the city and current temperature using the OpenWeather API.
-
-function showTemperature(response) {
-  let spanTemperature = document.querySelector("#today-temperature");
-  let h1City = document.querySelector("#country-1");
-  let currentHumidity = document.querySelector("#current-humidity");
-  let currentDescription = document.querySelector("#current-description");
-
-  let temperature = Math.round(response.data.main.temp);
-  let humidity = Math.round(response.data.main.humidity);
-  let description = response.data.weather[0].description;
-  let location = response.data.name;
-  let country = response.data.sys.country;
-
-  spanTemperature.innerHTML = `${temperature}`;
-  h1City.innerHTML = `${location}, ${country}`;
-  currentHumidity.innerHTML = `${humidity}%`;
-  currentDescription.innerHTML = `Weather with ${description} `;
-}
-
-function showCurrentPosition(position) {
-  console.log(position);
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
-
-  let apiKey = "28efe0bd6538d199aa426fa6ff9938dd";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
-
-  axios.get(apiUrl).then(showTemperature);
-}
-
-function getCurrentPosition() {
-  navigator.geolocation.getCurrentPosition(showCurrentPosition);
-}
-
-let currentButton = document.querySelector("#current-button");
-currentButton.addEventListener("click", getCurrentPosition);
-
 // Maybe add a temperature for a default city
 // Good for the customer experience
 
 // Create a new function to update the date and time according to the country that you are searching
+
+//create a function to convert celsiu to farentheit
