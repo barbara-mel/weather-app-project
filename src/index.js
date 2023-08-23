@@ -70,7 +70,7 @@ function displayWeather(event) {
   let getCity = event.data.name;
 
   h1.innerHTML = `${getCity}, ${getCountry}`;
-  searchTemperature.innerHTML = `${getTemperature} °C`;
+  searchTemperature.innerHTML = `${getTemperature}`;
   searchHumidity.innerHTML = `${getHumidity}%`;
   searchDescription = `Weather with ${getDescription} `;
 }
@@ -105,7 +105,7 @@ function showTemperature(response) {
   let location = response.data.name;
   let country = response.data.sys.country;
 
-  spanTemperature.innerHTML = `${temperature} °C `;
+  spanTemperature.innerHTML = `${temperature}`;
   h1City.innerHTML = `${location}, ${country}`;
   currentHumidity.innerHTML = `${humidity}%`;
   currentDescription.innerHTML = `Weather with ${description} `;

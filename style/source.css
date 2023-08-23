@@ -21,8 +21,8 @@ h2 {
 
 p {
   text-align: left;
-  font-size: 38px;
-  margin-left: 30px;
+  font-size: 46px;
+  margin-left: 0;
 }
 
 a {
@@ -41,6 +41,8 @@ button {
 
 .units {
   font-size: 14px;
+  position: relative;
+  top: -20px;
 }
 
 #current-button {
@@ -52,7 +54,7 @@ button {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
 }
 
 /* Search tab area */
