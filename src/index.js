@@ -10,6 +10,14 @@ let hours = now.getHours();
 
 let minutes = now.getMinutes();
 
+if (minutes < 10) {
+  minutes = "0" + minutes;
+} else {
+  minutes = minutes + "";
+}
+
+console.log(minutes);
+
 let year = now.getFullYear();
 
 let days = [
@@ -40,7 +48,7 @@ let months = [
 let month = months[now.getMonth()];
 
 let todayDay = document.querySelector("#current-date-display");
-todayDay.innerHTML = `Today, ${day} ${month} ${date}, ${hours}: ${minutes}`;
+todayDay.innerHTML = `Today, ${day} ${month} ${date}, ${hours}:${minutes}`;
 
 // HOMEWORK LESSON 5
 // 👨‍🏫 Your task
