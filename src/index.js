@@ -109,3 +109,21 @@ let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 showSearchPosition("New York");
+
+// Temperature Celcius - Farenhint
+
+let temperature = document.querySelector("#today-temperature");
+let celsiusTemperature = Math.round(temperature.innerHTML);
+let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
+
+function unitClickFahr() {
+  temperature.innerHTML = `${fahrenheitTemperature}`;
+}
+let pressUnit = document.querySelector("#fahrenheit");
+pressUnit.addEventListener("click", unitClickFahr);
+
+function unitClickCelcius() {
+  temperature.innerHTML = `${celsiusTemperature}`;
+}
+let pressUnitCelcius = document.querySelector("#celcius");
+pressUnitCelcius.addEventListener("click", unitClickCelcius);
