@@ -65,10 +65,10 @@ function displayWeather(event) {
   let getHumidity = Math.round(event.data.main.humidity);
   let getTemperature = Math.round(event.data.main.temp);
   let getDescription = event.data.weather[0].description;
-  let getCountry = event.data.sys.country;
+
   let getCity = event.data.name;
 
-  h1.innerHTML = `${getCity}, ${getCountry}`;
+  h1.innerHTML = `${getCity}`;
   searchTemperature.innerHTML = `${getTemperature}`;
   searchHumidity.innerHTML = `${getHumidity}%`;
   searchDescription = `Weather with ${getDescription} `;
