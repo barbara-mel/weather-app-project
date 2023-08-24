@@ -85,17 +85,19 @@ function showSearchPosition(show) {
   axios.get(url).then(displayWeather);
 }
 
-let pressSearchCountry = document.querySelector("#search-button");
-pressSearchCountry.addEventListener("click", showSearchPosition);
-
 // Maybe add a temperature for a default city
 // Good for the customer experience
 
 // Create a new function to update the date and time according to the country that you are searching
-
 //create a function to convert celsiu to farentheit
 
-// Function to submit the for pressing Enter
+// SEARCH ENGINE
+// Button response
+
+let pressSearchCountry = document.querySelector("#search-button");
+pressSearchCountry.addEventListener("click", showSearchPosition);
+
+//Function to submit the form (city) by pressing Enter
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -105,3 +107,5 @@ function handleSubmit(event) {
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+showSearchPosition("New York");
