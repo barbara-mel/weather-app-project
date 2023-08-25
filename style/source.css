@@ -35,8 +35,8 @@ a {
   text-decoration: none;
 }
 
-.description small:first-letter {
-  text-transform: capitalize;
+small :first-letter {
+  text-transform: uppercase;
 }
 
 .col-3 {
