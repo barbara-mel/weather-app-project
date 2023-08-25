@@ -31,6 +31,10 @@ button {
   background: transparent;
 }
 
+a {
+  text-decoration: none;
+}
+
 .col-3 {
   width: 15%;
 }
@@ -39,6 +43,15 @@ button {
   font-size: 14px;
   position: relative;
   top: -20px;
+}
+
+.active {
+  color: rgb(33, 33, 33);
+  cursor: default;
+}
+
+.active:hover {
+  text-decoration: none;
 }
 
 #current-button {

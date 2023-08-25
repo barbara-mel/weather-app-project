@@ -56,7 +56,8 @@ function displayWeather(response) {
   let dateElement = document.querySelector("#date-display");
   let iconElement = document.querySelector("#icon");
 
-  let celsiusTemperature = Math.round(response.data.main.temp);
+  celsiusTemperature = Math.round(response.data.main.temp);
+
   let getHumidity = Math.round(response.data.main.humidity);
   let getDescription = response.data.weather[0].description;
   let getCity = response.data.name;
@@ -64,7 +65,7 @@ function displayWeather(response) {
   let getIcon = response.data.weather[0].icon;
 
   city.innerHTML = `${getCity}`;
-  searchTemperature.innerHTML = `${celsiusTemperature}`;
+  searchTemperature.innerHTML = Math.round(celsiusTemperature);
   searchHumidity.innerHTML = `${getHumidity}%`;
   searchDescription = `Weather with ${getDescription} `;
   dateElement.innerHTML = `${getDate}`;
@@ -90,16 +91,23 @@ function handleSubmit(event) {
   showSearchPosition(cityInputElement.value);
 }
 
+// temperature switch function
+let celsiusTemperature = null;
+
 function unitClickFahr(event) {
   event.preventDefault();
-  let searchTemperature = document.querySelector("#current-temperature");
 
   pressUnitCelcius.classList.remove("active");
   pressUnitFahrenheit.classList.add("active");
 
+  let searchTemperature = document.querySelector("#current-temperature");
   let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
+
   searchTemperature.innerHTML = `${fahrenheitTemperature}`;
 }
+
+let pressUnitFahrenheit = document.querySelector("#fahrenheit");
+pressUnitFahrenheit.addEventListener("click", unitClickFahr);
 
 function unitClickCelcius(event) {
   event.preventDefault();
@@ -111,20 +119,15 @@ function unitClickCelcius(event) {
   searchTemperature.innerHTML = `${celsiusTemperature}`;
 }
 
-//GENERAL ELEMENTS
+let pressUnitCelcius = document.querySelector("#celcius");
+pressUnitCelcius.addEventListener("click", unitClickCelcius);
 
-let celsiusTemperature = Math.round(null);
+//GENERAL ELEMENTS
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 let pressSearchCity = document.querySelector("#search-button");
 pressSearchCity.addEventListener("click", showSearchPosition);
-
-let pressUnitFahrenheit = document.querySelector("#fahrenheit");
-pressUnitFahrenheit.addEventListener("click", unitClickFahr);
-
-let pressUnitCelcius = document.querySelector("#celcius");
-pressUnitCelcius.addEventListener("click", unitClickCelcius);
 
 showSearchPosition("New York");
