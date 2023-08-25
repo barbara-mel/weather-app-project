@@ -53,6 +53,7 @@ function displayWeather(response) {
   let city = document.querySelector("#city-1");
   let searchHumidity = document.querySelector("#current-humidity");
   let searchDescription = document.querySelector("#current-description");
+  let searchWind = document.querySelector("#wind-speed");
   let dateElement = document.querySelector("#date-display");
   let iconElement = document.querySelector("#icon");
 
@@ -63,17 +64,19 @@ function displayWeather(response) {
   let getCity = response.data.name;
   let getDate = formatDate(response.data.dt * 1000);
   let getIcon = response.data.weather[0].icon;
+  let getWindSpeed = response.data.wind.speed;
 
   city.innerHTML = `${getCity}`;
   searchTemperature.innerHTML = Math.round(celsiusTemperature);
   searchHumidity.innerHTML = `${getHumidity}%`;
-  searchDescription = `Weather with ${getDescription} `;
+  searchDescription.innerHTML = `Weather with ${getDescription} `;
   dateElement.innerHTML = `${getDate}`;
   iconElement.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${getIcon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+  searchWind.innerHTML = `Wind Speed: ${getWindSpeed} km/h`;
 }
 
 function showSearchPosition(city) {
@@ -91,8 +94,7 @@ function handleSubmit(event) {
   showSearchPosition(cityInputElement.value);
 }
 
-// temperature switch function
-let celsiusTemperature = null;
+// Temperature switch function
 
 function unitClickFahr(event) {
   event.preventDefault();
@@ -122,7 +124,9 @@ function unitClickCelcius(event) {
 let pressUnitCelcius = document.querySelector("#celcius");
 pressUnitCelcius.addEventListener("click", unitClickCelcius);
 
-//GENERAL ELEMENTS
+//OTHER GLOBAL ELEMENTS
+
+let celsiusTemperature = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);

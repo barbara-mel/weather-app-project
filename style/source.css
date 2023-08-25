@@ -35,6 +35,10 @@ a {
   text-decoration: none;
 }
 
+.description small:first-letter {
+  text-transform: capitalize;
+}
+
 .col-3 {
   width: 15%;
 }
