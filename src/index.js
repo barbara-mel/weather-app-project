@@ -1,83 +1,85 @@
 //Session Display Dates ////
-// ⏰Feature #1
-//In your project, display the current date and time using JavaScript: Tuesday 16:00
 
-let now = new Date();
-console.log(now);
+function formatDate(timestamp) {
+  let now = new Date(timestamp);
+  console.log(now);
 
-let date = now.getDate();
-let hours = now.getHours();
+  let date = now.getDate();
+  let hours = now.getHours();
 
-let minutes = now.getMinutes();
+  let minutes = now.getMinutes();
 
-if (minutes < 10) {
-  minutes = "0" + minutes;
-} else {
-  minutes = minutes + "";
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  } else {
+    minutes = minutes + "";
+  }
+
+  console.log(minutes);
+
+  let year = now.getFullYear();
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[now.getDay()]; // The getDay have an index between 0 and 6
+
+  let months = [
+    "Jan",
+    "Feb",
+    "March",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let month = months[now.getMonth()];
+
+  let todayDay = document.querySelector("#date-display");
+  todayDay.innerHTML = `Today, ${day} ${month} ${date}, ${hours}:${minutes}`;
 }
-
-console.log(minutes);
-
-let year = now.getFullYear();
-
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let day = days[now.getDay()]; // The getDay have an index between 0 and 6
-
-let months = [
-  "Jan",
-  "Feb",
-  "March",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-let month = months[now.getMonth()];
-
-let todayDay = document.querySelector("#current-date-display");
-todayDay.innerHTML = `Today, ${day} ${month} ${date}, ${hours}:${minutes}`;
 
 // HOMEWORK LESSON 5
 // 👨‍🏫 Your task
 //In your project, when a user searches for a city (example: New York), it should display the
 //name of the city on the result page and the current temperature of the city.
 
-function displayWeather(event) {
-  console.log(event);
-  let h1 = document.querySelector("#country-1");
-  let searchTemperature = document.querySelector("#today-temperature");
+function displayWeather(response) {
+  console.log(response);
+  let city = document.querySelector("#city-1");
+  let searchTemperature = document.querySelector("#current-temperature");
   let searchHumidity = document.querySelector("#current-humidity");
   let searchDescription = document.querySelector("#current-description");
+  let dateElement = document.querySelector("#date-display");
 
-  let getHumidity = Math.round(event.data.main.humidity);
-  let getTemperature = Math.round(event.data.main.temp);
-  let getDescription = event.data.weather[0].description;
+  let getHumidity = Math.round(response.data.main.humidity);
+  let getTemperature = Math.round(response.data.main.temp);
+  let getDescription = response.data.weather[0].description;
+  let getCity = response.data.name;
+  let getDate = todayDay(response.data.dt * 1000);
 
-  let getCity = event.data.name;
-
-  h1.innerHTML = `${getCity}`;
+  city.innerHTML = `${getCity}`;
   searchTemperature.innerHTML = `${getTemperature}`;
   searchHumidity.innerHTML = `${getHumidity}%`;
   searchDescription = `Weather with ${getDescription} `;
+  dateElement.innerHTML = `${getDate}`;
 }
 
 function showSearchPosition(show) {
   console.log(show);
-  let searchCountry = document.querySelector("#search-tab-input");
-  let city = searchCountry.value;
+  let searchCity = document.querySelector("#search-tab-input");
+  let city = searchCity.value;
   let key = "83ab779da7b3293129b746ff6a1dd10c";
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
   console.log(url);
@@ -94,8 +96,8 @@ function showSearchPosition(show) {
 // SEARCH ENGINE
 // Button response
 
-let pressSearchCountry = document.querySelector("#search-button");
-pressSearchCountry.addEventListener("click", showSearchPosition);
+let pressSearchCity = document.querySelector("#search-button");
+pressSearchCity.addEventListener("click", showSearchPosition);
 
 //Function to submit the form (city) by pressing Enter
 
@@ -108,22 +110,34 @@ function handleSubmit(event) {
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-showSearchPosition("New York");
+//showSearchPosition("New York");
 
 // Temperature Celcius - Farenhint
 
-let temperature = document.querySelector("#today-temperature");
-let celsiusTemperature = Math.round(temperature.innerHTML);
-let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
+function unitClickFahr(event) {
+  event.preventDefault();
+  let searchTemperature = document.querySelector("#today-temperature");
 
-function unitClickFahr() {
-  temperature.innerHTML = `${fahrenheitTemperature}`;
-}
-let pressUnit = document.querySelector("#fahrenheit");
-pressUnit.addEventListener("click", unitClickFahr);
+  pressUnitCelcius.classList.remove("active");
+  pressUnitFahrenheit.classList.add("active");
 
-function unitClickCelcius() {
-  temperature.innerHTML = `${celsiusTemperature}`;
+  let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
+  searchTemperature.innerHTML = `${fahrenheitTemperature}`;
 }
+
+function unitClickCelcius(event) {
+  event.preventDefault();
+
+  pressUnitCelcius.classList.remove("active");
+  pressUnitFahrenheit.classList.add("active");
+
+  searchTemperature.innerHTML = `${celsiusTemperature}`;
+  let searchTemperature = document.querySelector("#temperature-today");
+}
+let celsiusTemperature = null;
+
+let pressUnitFahrenheit = document.querySelector("#fahrenheit");
+pressUnitFahrenheit.addEventListener("click", unitClickFahr);
+
 let pressUnitCelcius = document.querySelector("#celcius");
 pressUnitCelcius.addEventListener("click", unitClickCelcius);
