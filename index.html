@@ -61,10 +61,11 @@
 
             <div class="row-temperature-image">
               <img
-                class="main-temp-image"
-                src="image/partly_cloudy.png"
-                alt="sun"
+                class="float-left main-temp-image"
+                src=""
+                alt="Clear"
                 width="150"
+                id="icon"
               />
               <p>
                 <span
@@ -72,15 +73,14 @@
                   id="current-temperature"
                   >32 </span
                 ><small class="units"
-                  ><a href="#" id="celcius">ºC</a> |
+                  ><a href="#" id="celcius" class="active">ºC</a> |
                   <a href="#" id="fahrenheit">ºF</a></small
                 >
               </p>
             </div>
-            <div
-              class="row-extra-info fw-bolder"
-              id="current-date-display"
-            ></div>
+            <div>
+              <small id="date-display">Last Update: </small>
+            </div>
             <div>
               <small>Humidity: <span id="current-humidity">%</span></small>
             </div>

@@ -1,23 +1,20 @@
+// FUNCTIONS
 //Session Display Dates ////
 
 function formatDate(timestamp) {
-  let now = new Date(timestamp);
-  console.log(now);
+  let date = new Date(timestamp);
+  console.log(date);
 
-  let date = now.getDate();
-  let hours = now.getHours();
+  let hours = date.getHours();
 
-  let minutes = now.getMinutes();
-
+  let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = "0" + minutes;
   } else {
     minutes = minutes + "";
   }
 
-  console.log(minutes);
-
-  let year = now.getFullYear();
+  let dateNumber = date.getDate();
 
   let days = [
     "Sunday",
@@ -28,7 +25,6 @@ function formatDate(timestamp) {
     "Friday",
     "Saturday",
   ];
-  let day = days[now.getDay()]; // The getDay have an index between 0 and 6
 
   let months = [
     "Jan",
@@ -44,42 +40,42 @@ function formatDate(timestamp) {
     "Nov",
     "Dec",
   ];
-  let month = months[now.getMonth()];
 
-  let todayDay = document.querySelector("#date-display");
-  todayDay.innerHTML = `Today, ${day} ${month} ${date}, ${hours}:${minutes}`;
+  let month = months[date.getMonth()];
+  let day = days[date.getDay()];
+  return `Today, ${day} ${month} ${dateNumber} , ${hours}:${minutes}`;
 }
 
-// HOMEWORK LESSON 5
-// 👨‍🏫 Your task
-//In your project, when a user searches for a city (example: New York), it should display the
-//name of the city on the result page and the current temperature of the city.
+//Display Weather from city searched
 
 function displayWeather(response) {
-  console.log(response);
-  let city = document.querySelector("#city-1");
   let searchTemperature = document.querySelector("#current-temperature");
+  let city = document.querySelector("#city-1");
   let searchHumidity = document.querySelector("#current-humidity");
   let searchDescription = document.querySelector("#current-description");
   let dateElement = document.querySelector("#date-display");
+  let iconElement = document.querySelector("#icon");
 
+  let celsiusTemperature = Math.round(response.data.main.temp);
   let getHumidity = Math.round(response.data.main.humidity);
-  let getTemperature = Math.round(response.data.main.temp);
   let getDescription = response.data.weather[0].description;
   let getCity = response.data.name;
-  let getDate = todayDay(response.data.dt * 1000);
+  let getDate = formatDate(response.data.dt * 1000);
+  let getIcon = response.data.weather[0].icon;
 
   city.innerHTML = `${getCity}`;
-  searchTemperature.innerHTML = `${getTemperature}`;
+  searchTemperature.innerHTML = `${celsiusTemperature}`;
   searchHumidity.innerHTML = `${getHumidity}%`;
   searchDescription = `Weather with ${getDescription} `;
   dateElement.innerHTML = `${getDate}`;
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${getIcon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
-function showSearchPosition(show) {
-  console.log(show);
-  let searchCity = document.querySelector("#search-tab-input");
-  let city = searchCity.value;
+function showSearchPosition(city) {
   let key = "83ab779da7b3293129b746ff6a1dd10c";
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
   console.log(url);
@@ -87,36 +83,16 @@ function showSearchPosition(show) {
   axios.get(url).then(displayWeather);
 }
 
-// Maybe add a temperature for a default city
-// Good for the customer experience
-
-// Create a new function to update the date and time according to the country that you are searching
-//create a function to convert celsiu to farentheit
-
-// SEARCH ENGINE
-// Button response
-
-let pressSearchCity = document.querySelector("#search-button");
-pressSearchCity.addEventListener("click", showSearchPosition);
-
-//Function to submit the form (city) by pressing Enter
-
 function handleSubmit(event) {
   event.preventDefault();
+
   let cityInputElement = document.querySelector("#search-tab-input");
   showSearchPosition(cityInputElement.value);
 }
 
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", handleSubmit);
-
-//showSearchPosition("New York");
-
-// Temperature Celcius - Farenhint
-
 function unitClickFahr(event) {
   event.preventDefault();
-  let searchTemperature = document.querySelector("#today-temperature");
+  let searchTemperature = document.querySelector("#current-temperature");
 
   pressUnitCelcius.classList.remove("active");
   pressUnitFahrenheit.classList.add("active");
@@ -128,16 +104,27 @@ function unitClickFahr(event) {
 function unitClickCelcius(event) {
   event.preventDefault();
 
-  pressUnitCelcius.classList.remove("active");
-  pressUnitFahrenheit.classList.add("active");
+  pressUnitCelcius.classList.add("active");
+  pressUnitFahrenheit.classList.remove("active");
 
+  let searchTemperature = document.querySelector("#current-temperature");
   searchTemperature.innerHTML = `${celsiusTemperature}`;
-  let searchTemperature = document.querySelector("#temperature-today");
 }
-let celsiusTemperature = null;
+
+//GENERAL ELEMENTS
+
+let celsiusTemperature = Math.round(null);
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
+
+let pressSearchCity = document.querySelector("#search-button");
+pressSearchCity.addEventListener("click", showSearchPosition);
 
 let pressUnitFahrenheit = document.querySelector("#fahrenheit");
 pressUnitFahrenheit.addEventListener("click", unitClickFahr);
 
 let pressUnitCelcius = document.querySelector("#celcius");
 pressUnitCelcius.addEventListener("click", unitClickCelcius);
+
+showSearchPosition("New York");
