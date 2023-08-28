@@ -134,4 +134,4 @@ form.addEventListener("submit", handleSubmit);
 let pressSearchCity = document.querySelector("#search-button");
 pressSearchCity.addEventListener("click", showSearchPosition);
 
-showSearchPosition("New York");
+showSearchPosition("Rio de Janeiro");
