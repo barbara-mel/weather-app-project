@@ -54,7 +54,7 @@
 
       <div class="container-weather">
         <div class="row">
-          <div class="col-4">
+          <div class="col-5">
             <div class="row-city">
               <h1 id="city-1">City</h1>
             </div>
@@ -92,51 +92,23 @@
               <small id="wind-speed">Wind Speed: </small>
             </div>
           </div>
-          <div class="col-1"></div>
-          <div class="col-7">
-            <div class="row next-temperature-days">
-              <div class="col-4">
-                <i class="fa-regular fa-sun icon-temperature"></i>
-              </div>
-              <div class="col-8">
-                30°C | 25°C
-                <div class="date">Monday, 07/31</div>
-              </div>
-            </div>
-            <div class="row next-temperature-days">
-              <div class="col-4">
-                <i class="fa-solid fa-cloud-sun icon-temperature"></i>
-              </div>
-              <div class="col-8">
-                31°C | 25°C
-                <div class="date">Tuesday, 08/01</div>
-              </div>
-            </div>
-            <div class="row next-temperature-days">
-              <div class="col-4">
-                <i class="fa-solid fa-cloud-sun icon-temperature"></i>
-              </div>
-              <div class="col-8">
-                28°C | 25°C
-                <div class="date">Wednesday, 08/02</div>
-              </div>
-            </div>
-            <div class="row next-temperature-days">
-              <div class="col-4">
-                <i class="fa-regular fa-sun icon-temperature"></i>
-              </div>
-              <div class="col-8">
-                33°C | 27°C
-                <div class="date">Thursday, 08/03</div>
-              </div>
-            </div>
-            <div class="row next-temperature-days">
-              <div class="col-4">
-                <i class="fa-solid fa-cloud-bolt icon-temperature"></i>
-              </div>
-              <div class="col-8">
-                37°C | 22°C
-                <div class="date">Friday, 08/04</div>
+
+          <div class="col-7" id="forecast">
+            <div class="row">
+              <div class="row next-temperature-days">
+                <div class="col-4">
+                  <img
+                    class="float-left main-temp-image"
+                    src="http://openweathermap.org/img/wn/50d@2x.png"
+                    alt="temperature-icon"
+                    width="50"
+                  />
+                </div>
+                <div class="col-8">
+                  <span class="weather-forecast-temperature-max">30°C</span> |
+                  <span class="weather-forecast-temperature-min">25°C</span>
+                  <div class="forecast-time">Monday, 07/31</div>
+                </div>
               </div>
             </div>
           </div>

@@ -124,6 +124,37 @@ function unitClickCelcius(event) {
 let pressUnitCelcius = document.querySelector("#celcius");
 pressUnitCelcius.addEventListener("click", unitClickCelcius);
 
+//FORECAST LOGIC
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Thursday", "Friday", "Saturday", "Sunday", "Monday"];
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="row next-temperature-days">
+                <div class="col-4">
+                  <img
+                class="float-left main-temp-image"
+                src="http://openweathermap.org/img/wn/50d@2x.png"
+                alt="temperature-icon"
+                width="50"/>
+                </div>
+                <div class="col-8">
+                  <span class="weather-forecast-temperature-max">30°C</span> |
+                  <span class="weather-forecast-temperature-min">25°C</span>
+                  <div class="forecast-time">${day}, 07/31</div>
+                </div>
+              </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 //OTHER GLOBAL ELEMENTS
 
 let celsiusTemperature = null;
@@ -135,3 +166,5 @@ let pressSearchCity = document.querySelector("#search-button");
 pressSearchCity.addEventListener("click", showSearchPosition);
 
 showSearchPosition("Rio de Janeiro");
+
+displayForecast();
