@@ -48,6 +48,13 @@ function formatDate(timestamp) {
 
 //Display Weather from city searched
 
+function getForecast(coordinates) {
+  let apiKey = "6bfa54f242cbb59343d4e58db578dc61";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function displayWeather(response) {
   let searchTemperature = document.querySelector("#current-temperature");
   let city = document.querySelector("#city-1");
@@ -77,12 +84,13 @@ function displayWeather(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
   searchWind.innerHTML = `Wind Speed: ${getWindSpeed} km/h`;
+
+  getForecast(response.data.coord);
 }
 
 function showSearchPosition(city) {
   let key = "83ab779da7b3293129b746ff6a1dd10c";
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
-  console.log(url);
 
   axios.get(url).then(displayWeather);
 }
@@ -126,7 +134,8 @@ pressUnitCelcius.addEventListener("click", unitClickCelcius);
 
 //FORECAST LOGIC
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
@@ -141,7 +150,7 @@ function displayForecast() {
                 class="float-left main-temp-image"
                 src="http://openweathermap.org/img/wn/50d@2x.png"
                 alt="temperature-icon"
-                width="50"/>
+                width="60"/>
                 </div>
                 <div class="col-8">
                   <span class="weather-forecast-temperature-max">30°C</span> |
@@ -166,5 +175,3 @@ let pressSearchCity = document.querySelector("#search-button");
 pressSearchCity.addEventListener("click", showSearchPosition);
 
 showSearchPosition("Rio de Janeiro");
-
-displayForecast();
