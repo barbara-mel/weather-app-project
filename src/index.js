@@ -169,7 +169,7 @@ function displayForecast(response) {
                   forecastDay.weather[0].icon
                 }@2x.png"
                 alt="temperature-icon"
-                width="60"/>
+                width="50"/>
                 </div>
                 <div class="col-8">
                   <span class="weather-forecast-temperature-max">${Math.round(
@@ -178,9 +178,7 @@ function displayForecast(response) {
                   <span class="weather-forecast-temperature-min">${Math.round(
                     forecastDay.temp.min
                   )}°C</span>
-                  <div class="forecast-time">${formatDay(
-                    forecastDay.dt
-                  )}, 07/31</div>
+                  <div class="forecast-time">${formatDay(forecastDay.dt)}</div>
                 </div>
               </div>`;
     }
