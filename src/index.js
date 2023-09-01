@@ -134,30 +134,56 @@ pressUnitCelcius.addEventListener("click", unitClickCelcius);
 
 //FORECAST LOGIC
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[day];
+}
+
 function displayForecast(response) {
   console.log(response.data.daily);
+
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  let days = ["Thursday", "Friday", "Saturday", "Sunday", "Monday"];
 
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="row next-temperature-days">
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="row next-temperature-days">
                 <div class="col-4">
                   <img
                 class="float-left main-temp-image"
-                src="http://openweathermap.org/img/wn/50d@2x.png"
+                src="http://openweathermap.org/img/wn/${
+                  forecastDay.weather[0].icon
+                }@2x.png"
                 alt="temperature-icon"
                 width="60"/>
                 </div>
                 <div class="col-8">
-                  <span class="weather-forecast-temperature-max">30°C</span> |
-                  <span class="weather-forecast-temperature-min">25°C</span>
-                  <div class="forecast-time">${day}, 07/31</div>
+                  <span class="weather-forecast-temperature-max">${Math.round(
+                    forecastDay.temp.max
+                  )}°C</span> |
+                  <span class="weather-forecast-temperature-min">${Math.round(
+                    forecastDay.temp.min
+                  )}°C</span>
+                  <div class="forecast-time">${formatDay(
+                    forecastDay.dt
+                  )}, 07/31</div>
                 </div>
               </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
