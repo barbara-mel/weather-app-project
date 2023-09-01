@@ -36,15 +36,15 @@ a {
 }
 
 .col-3 {
-  width: 15%;
+  width: 30%;
 }
 
 .col-4 {
-  width: 20%;
+  width: 25%;
 }
 
 .row {
-  margin-left: 30px;
+  margin-left: 10px;
   margin-right: 10px;
 }
 
